@@ -1,0 +1,288 @@
+openapi: 3.0.3
+info:
+  title: APP_5 API
+  description: API для автоматизации принятия решений венчурными инвесторами и стартапами.
+  version: 1.0.0
+servers:
+  - url: https://api.app5.com
+    description: Production API
+  - url: http://localhost:8000
+    description: Local API (development)
+
+paths:
+  /auth/login:
+    post:
+      summary: Авторизация пользователя
+      description: Возвращает JWT-токен при успешном входе.
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: user@app5.com
+                password:
+                  type: string
+                  example: SecurePassword123!
+      responses:
+        "200":
+          description: Успешная авторизация
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                    example: "eyJhbGciOiJIUzI1NiIsIn..."
+                  token_type:
+                    type: string
+                    example: "bearer"
+        "401":
+          description: Неверный email или пароль
+
+  /auth/register:
+    post:
+      summary: Регистрация нового пользователя
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: user@app5.com
+                password:
+                  type: string
+                  example: SecurePassword123!
+                role:
+                  type: string
+                  enum: [investor, founder]
+                  example: investor
+      responses:
+        "201":
+          description: Пользователь успешно зарегистрирован
+        "400":
+          description: Ошибка валидации
+
+  /startups:
+    get:
+      summary: Получение списка стартапов
+      tags:
+        - Startups
+      parameters:
+        - name: industry
+          in: query
+          description: Фильтрация по индустрии
+          schema:
+            type: string
+            example: FinTech
+        - name: stage
+          in: query
+          description: Фильтрация по стадии
+          schema:
+            type: string
+            example: Seed
+      responses:
+        "200":
+          description: Список стартапов
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      example: "c5f5e3a0-3ad2-4b8f-9fd9-2bf76a3b8e6b"
+                    name:
+                      type: string
+                      example: "AI Analytics Inc."
+                    stage:
+                      type: string
+                      example: "Series A"
+                    industry:
+                      type: string
+                      example: "AI"
+                    min_check:
+                      type: integer
+                      example: 500000
+
+  /investors:
+    get:
+      summary: Получение списка инвесторов
+      tags:
+        - Investors
+      responses:
+        "200":
+          description: Список инвесторов
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      example: "d2c1e7a0-3ad2-4b8f-9fd9-2bf76a3b8e6b"
+                    name:
+                      type: string
+                      example: "John Doe VC"
+                    thesis:
+                      type: string
+                      example: "Инвестируем в AI и FinTech"
+                    min_check:
+                      type: integer
+                      example: 1000000
+
+  /kpi/analyze:
+    post:
+      summary: Анализ KPI стартапа
+      description: Подбирает KPI по стадии и типу сделки, выдаёт рекомендации по документам
+      tags:
+        - KPI Analysis
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                startup_id:
+                  type: integer
+                  example: 101
+                stage:
+                  type: string
+                  example: "Early Stage"
+                type_deal:
+                  type: string
+                  example: "Equity"
+                selected_kpis:
+                  type: array
+                  items:
+                    type: string
+                  example: ["Revenue Growth", "Burn Rate"]
+      responses:
+        "200":
+          description: Успешный анализ KPI
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  startup_id:
+                    type: integer
+                  kpi_results:
+                    type: object
+                    example:
+                      Financial Performance:
+                        Revenue Growth:
+                          value: "50%"
+                          status: "Получен"
+                        Burn Rate:
+                          value: "Low"
+                          status: "Нет"
+                  recommended_docs:
+                    type: array
+                    items:
+                      type: string
+                    example: ["Term Sheet", "Investment Agreement"]
+        "400":
+          description: Неправильные входные параметры
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: "Invalid startup_id"
+        "503":
+          description: Due Diligence Service недоступен
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: "Due Diligence Service is unavailable"
+  /deals:
+    get:
+      summary: Получение списка сделок
+      tags:
+        - Deals
+      responses:
+        "200":
+          description: Список сделок
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      example: "f6a9e2d0-4c3d-11ed-b878-0242ac120002"
+                    investor_id:
+                      type: string
+                      example: "d2c1e7a0-3ad2-4b8f-9fd9-2bf76a3b8e6b"
+                    startup_id:
+                      type: string
+                      example: "c5f5e3a0-3ad2-4b8f-9fd9-2bf76a3b8e6b"
+                    status:
+                      type: string
+                      enum: ["Due Diligence", "Deal Room", "Closed", "Exited"]
+                      example: "Closed"
+                    investment_amount:
+                      type: integer
+                      example: 1000000
+
+  /monitoring:
+    get:
+      summary: Получение отчетов о стартапах
+      tags:
+        - Monitoring
+      parameters:
+        - name: startup_id
+          in: query
+          required: true
+          schema:
+            type: string
+            example: "c5f5e3a0-3ad2-4b8f-9fd9-2bf76a3b8e6b"
+      responses:
+        "200":
+          description: Мониторинговый отчет о стартапе
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  startup_id:
+                    type: string
+                    example: "c5f5e3a0-3ad2-4b8f-9fd9-2bf76a3b8e6b"
+                  report_date:
+                    type: string
+                    format: date
+                    example: "2024-02-12"
+                  revenue_growth:
+                    type: number
+                    example: 15.2
+                  customer_acquisition_cost:
+                    type: number
+                    example: 120
+                  churn_rate:
+                    type: number
+                    example: 5.5                    

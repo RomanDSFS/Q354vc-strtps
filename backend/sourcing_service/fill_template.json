@@ -1,0 +1,117 @@
+{
+    "categories": [
+      {
+        "id": 1,
+        "name": "The problem and its relevance",
+        "questions": [
+          {
+            "id": 1,
+            "question": "Number/share of target audience facing the problem",
+            "options": {
+              "0": "No data or not confirmed",
+              "1": "Low indicator, little significance",
+              "2": "Moderate, requires clarification",
+              "3": "High proportion, clear confirmation of the problem"
+            }
+          },
+          {
+            "id": 2,
+            "question": "Potential savings in time, money or resources",
+            "options": {
+              "0": "No figures, savings not proven",
+              "1": "Savings are minimal or estimated approximately",
+              "2": "Average savings, data partially confirmed",
+              "3": "Significant savings confirmed by real calculations"
+            }
+          },
+          {
+            "id": 3,
+            "question": "Problem prioritization level (frequency/seriousness)",
+            "options": {
+              "0": "The problem does not appear to be critical",
+              "1": "The problem occurs, but infrequently",
+              "2": "The problem is quite frequent or noticeable",
+              "3": "The problem is critical, the solution is in high demand"
+            }
+          },
+          {
+            "id": 4,
+            "question": "Frequency of complaints or calls to support service",
+            "options": {
+              "0": "No statistics are kept",
+              "1": "Complaints are isolated, no systematization",
+              "2": "Moderate level of complaints, statistics are available",
+              "3": "High level of complaints, with a plan in place to prioritize their resolution"
+            }
+          },
+          {
+            "id": 5,
+            "question": "Market size of the problem to be solved (in mln/bln)",
+            "options": {
+              "0": "No market assessment",
+              "1": "The market amount is estimated approximately",
+              "2": "Market assessment at the level of market reports",
+              "3": "Clear, verified market assessment with methodology specified"
+            }
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Solution and unique selling proposition",
+        "questions": [
+          {
+            "id": 1,
+            "question": "Time/cost of solution compared to peers",
+            "options": {
+              "0": "No comparison with analogues",
+              "1": "The advantage is not obvious, not calculated",
+              "2": "There is an advantage, comparative figures are given",
+              "3": "Clear and meaningful benefit, substantiated in detail"
+            }
+          },
+          {
+            "id": 2,
+            "question": "Adoption Rate (customer adoption rate)",
+            "options": {
+              "0": "No implementation data",
+              "1": "Low level of utilization",
+              "2": "Stable growth rates, but not explosive",
+              "3": "High rate of adoption, there is a funnel and clear growth indicators"
+            }
+          },
+          {
+            "id": 3,
+            "question": "Net Promoter Score (NPS)",
+            "options": {
+              "0": "Not measured",
+              "1": "Below industry average or insufficient data",
+              "2": "NPS level on the market average",
+              "3": "High NPS, customers are actively recommending the product"
+            }
+          },
+          {
+            "id": 4,
+            "question": "Time-to-value (speed of receiving the result by the client)",
+            "options": {
+              "0": "Difficult to assess, no data available",
+              "1": "Long cycle to achieve the result",
+              "2": "Moderate speed, competitive rate",
+              "3": "Quick results, one of the key benefits"
+            }
+          },
+          {
+            "id": 5,
+            "question": "Customer Satisfaction Score (CSAT)",
+            "options": {
+              "0": "Not going to",
+              "1": "There is feedback, but no systematic collection",
+              "2": "Average level of satisfaction",
+              "3": "High satisfaction confirmed by regular surveys"
+            }
+          }
+        ]
+      }
+    ]
+  }
+  

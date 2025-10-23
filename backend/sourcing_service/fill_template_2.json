@@ -1,0 +1,24 @@
+[
+    {
+        "id": 1,
+        "category": "The problem and its relevance",
+        "question": "Number/share of target audience facing the problem",
+        "options": {
+            "0": "No data or not confirmed",
+            "1": "Low indicator, little significance",
+            "2": "Moderate, requires clarification",
+            "3": "High proportion, clear confirmation of the problem"
+        }
+    },
+    {
+        "id": 2,
+        "category": "Solution and unique selling proposition",
+        "question": "Time/cost of solution compared to peers",
+        "options": {
+            "0": "No comparison with analogues",
+            "1": "The advantage is not obvious, not calculated",
+            "2": "There is an advantage, comparative figures are given",
+            "3": "Clear and meaningful benefit, substantiated in detail"
+        }
+    }
+]
